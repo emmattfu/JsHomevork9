@@ -94,9 +94,13 @@ const str = (function () {
     let string;
 
     function setString(text) {
-        if (typeof text === "undefined") string = '';
-        if (typeof text === "number")  string += '';
-        string = text;
+        if (!text) {
+            string = '';
+        } else if (typeof text === "number") {
+            string = text + "";
+        } else {
+            string = text;
+        }
     }
 
     function getString() {
@@ -116,5 +120,68 @@ const str = (function () {
         getString: getString,
         getStringLength: getStringLength,
         getReversedString: getReversedString
+    };
+}());
+
+// Задача № 6
+
+const calc = (function () {
+    let startNumber;
+    
+    function setNumber(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        if (Number(number)) {
+            number = +number;
+        }
+        startNumber = number;
+        return this;
+    }
+
+    function plus(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        if (Number(number)) {
+            number = +number;
+        }
+        startNumber += number;
+        return this;
+    }
+
+    function minus(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        startNumber -= number;
+        return this;
+    }
+
+    function divide(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        if (number === 0) return new Error ("Can't do that");
+        startNumber /= number;
+        return this;
+    }
+    
+    function myltiply(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        startNumber *= number;
+        return this;
+    }
+    
+    function elevate(number) {
+        if (isNaN(number)) return new Error ('We work only with numbers');
+        startNumber = Math.pow(startNumber, number);
+        return this;
+    }
+
+    function getNumber() {
+        return startNumber;
+    }
+
+    return {
+        setNumber: setNumber,
+        plus: plus,
+        myltiply,
+        getNumber,
+        divide,
+        minus,
+        elevate
     };
 }());
