@@ -172,7 +172,11 @@ const calc = (function () {
     }
 
     function getNumber() {
-        return startNumber;
+        if (startNumber % 1 === 0) {
+            return startNumber;
+        } else {
+            return Number(startNumber.toFixed(2));
+        }
     }
 
     return {
